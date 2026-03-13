@@ -1,0 +1,7 @@
+{
+  "name": "Cypress Big Tex Trailers - Next Gen",
+  "description": "A premium, AI-powered inventory and sales platform for Cypress Big Tex Trailers, featuring intelligent search and rugged, modern design.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
