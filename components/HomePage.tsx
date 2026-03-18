@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { useInventory } from '../context/InventoryContext';
-import { TrailerCard } from './TrailerCard';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { TrailerCard, SheetTrailer } from './TrailerCard';
 import { Hero } from './Hero';
 
 export const HomePage: React.FC = () => {
-  const { inventory } = useInventory();
-  
-  // Show 10 items total.
-  // Sort priority: Featured items first, then others.
-  const displayInventory = [...inventory]
-    .filter(i => i.status !== 'Sold' && !i.isHidden)
-    .sort((a, b) => {
-      // If a is featured and b is not, a comes first (-1)
-      if (a.isFeatured && !b.isFeatured) return -1;
-      // If b is featured and a is not, b comes first (1)
-      if (!a.isFeatured && b.isFeatured) return 1;
-      return 0;
-    })
-    .slice(0, 10);
+  const [trailers, setTrailers] = useState<SheetTrailer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      try {
+        const res = await fetch('/api/inventory');
+        if (res.ok) {
+          const data = await res.json();
+          // Filter out completely empty rows, reverse to get latest additions
+          const validData = data.filter((t: SheetTrailer) => t.name || t.sku);
+          setTrailers(validData.reverse().slice(0, 8));
+        }
+      } catch (err) {
+        console.error('Failed to load recent inventory', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchInventory();
+  }, []);
 
   return (
     <>
@@ -49,7 +55,6 @@ export const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 text-center">
             <p className="text-gray-400 font-bold uppercase tracking-widest mb-8 text-xs">Proud Authorized Dealer For</p>
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                {/* Image logos for the brands */}
                 <img src="/BigTex-Logo.png" alt="Big Tex" className="h-12 md:h-16 object-contain" />
                 <img src="/anvilbrandlogo.jpg" alt="Anvil" className="h-12 md:h-16 object-contain" />
                 <img src="/IMG_7394.jpeg" alt="TXP" className="h-12 md:h-16 object-contain" />
@@ -60,25 +65,30 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Featured Inventory */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+      <section className="py-20 bg-brand-dark border-t-8 border-brand-red relative">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4 border-b border-gray-800 pb-6">
             <div>
-              <h2 className="font-display font-bold text-4xl text-brand-dark mb-2">LATEST INVENTORY</h2>
-              <div className="h-1 w-20 bg-brand-red"></div>
-              <p className="mt-4 text-gray-500 max-w-xl">Browsing {displayInventory.length} of our top models. Stock changes daily.</p>
+              <h2 className="font-display font-bold text-4xl text-white mb-2">LATEST INVENTORY</h2>
+              <p className="mt-2 text-gray-400 max-w-xl">Browsing our {trailers.length} most recent additions. Live from the lot.</p>
             </div>
-            <Link to="/inventory" className="hidden md:flex items-center text-brand-red font-bold hover:text-brand-dark transition-colors group">
+            <Link to="/inventory" className="hidden md:flex items-center text-brand-red font-bold hover:text-white transition-colors group tracking-widest uppercase">
                 VIEW ALL INVENTORY <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {displayInventory.map(t => <TrailerCard key={t.id} trailer={t} />)}
-          </div>
+          {loading ? (
+             <div className="flex justify-center items-center py-20 flex-col">
+               <Loader2 className="w-12 h-12 text-brand-red animate-spin mb-4" />
+             </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {trailers.map(t => <TrailerCard key={t.id || t.sku} trailer={t} />)}
+            </div>
+          )}
           
           <div className="mt-12 text-center md:hidden">
-             <Link to="/inventory" className="inline-block bg-white border border-gray-200 text-brand-red font-bold px-8 py-3 rounded-full shadow-sm hover:bg-gray-50">
+             <Link to="/inventory" className="inline-block bg-brand-red text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-brand-red transition-colors w-full tracking-widest uppercase">
                 VIEW ALL INVENTORY
              </Link>
           </div>
