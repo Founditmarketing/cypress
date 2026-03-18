@@ -38,6 +38,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         inStock: row[4] || '',
         regularPrice: row[7] || '',
         categories: row[8] || '',
+        brand: row[10] || '',
         images,
         shortDescription: row[2] || '',
         htmlSpecs: row[12] || '',

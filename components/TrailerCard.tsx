@@ -8,6 +8,7 @@ export interface SheetTrailer {
   inStock: string;
   regularPrice: string;
   categories: string;
+  brand?: string;
   images: string[];
   shortDescription?: string;
   htmlSpecs?: string;

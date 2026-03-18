@@ -3,8 +3,11 @@ import { Loader2 } from 'lucide-react';
 
 import { TrailerCard, SheetTrailer } from './TrailerCard';
 
+const BRANDS = ["All", "Big Tex", "TXP", "ANVIL", "Dexter Axle", "Liberty"];
+
 export const InventoryPage: React.FC = () => {
   const [trailers, setTrailers] = useState<SheetTrailer[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState('All');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -24,6 +27,11 @@ export const InventoryPage: React.FC = () => {
     fetchInventory();
   }, []);
 
+  const filteredTrailers = trailers.filter(t => {
+    if (selectedBrand === 'All') return true;
+    return t.brand?.toLowerCase().includes(selectedBrand.toLowerCase());
+  });
+
   return (
     <div className="bg-brand-dark min-h-screen py-16 relative overflow-hidden text-white border-t-8 border-brand-red">
       <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none"></div>
@@ -36,9 +44,28 @@ export const InventoryPage: React.FC = () => {
             <p className="text-gray-400 font-medium tracking-wide">Directly synchronized from our master sheet.</p>
           </div>
           <span className="text-brand-red font-bold tracking-widest uppercase text-sm border-2 border-brand-red px-4 py-2 bg-brand-red/10 animate-pulse">
-            {trailers.length} UNITS AVAILABLE
+            {filteredTrailers.length} UNITS AVAILABLE
           </span>
         </div>
+
+        {/* Brand Filter */}
+        {!loading && !error && (
+          <div className="mb-10 flex flex-wrap gap-3">
+            {BRANDS.map(brand => (
+              <button
+                key={brand}
+                onClick={() => setSelectedBrand(brand)}
+                className={`px-5 py-2 font-bold text-sm tracking-wider uppercase rounded-sm transition-all duration-300 ${
+                  selectedBrand === brand 
+                    ? 'bg-brand-red text-white border-2 border-brand-red shadow-[0_0_15px_rgba(204,0,0,0.5)]' 
+                    : 'bg-transparent text-gray-400 border-2 border-gray-700 hover:border-gray-500 hover:text-white'
+                }`}
+              >
+                {brand}
+              </button>
+            ))}
+          </div>
+        )}
 
         {loading ? (
           <div className="flex justify-center items-center py-40 flex-col">
@@ -51,13 +78,13 @@ export const InventoryPage: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {trailers.map((t, idx) => (
+            {filteredTrailers.map((t, idx) => (
               <TrailerCard key={t.id || idx.toString()} trailer={t} />
             ))}
             
-            {trailers.length === 0 && (
+            {filteredTrailers.length === 0 && (
               <div className="col-span-full py-20 text-center border-2 border-dashed border-gray-800 text-gray-500 font-display uppercase tracking-widest">
-                No active inventory found in the main sheet.
+                No active inventory found for {selectedBrand === 'All' ? 'the main sheet' : selectedBrand}.
               </div>
             )}
           </div>
