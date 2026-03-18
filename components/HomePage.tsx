@@ -65,14 +65,14 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Featured Inventory */}
-      <section className="py-20 bg-brand-dark border-t-8 border-brand-red relative">
+      <section className="py-20 bg-white relative">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4 border-b border-gray-800 pb-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4 border-b border-gray-200 pb-6">
             <div>
-              <h2 className="font-display font-bold text-4xl text-white mb-2">LATEST INVENTORY</h2>
-              <p className="mt-2 text-gray-400 max-w-xl">Browsing our {trailers.length} most recent additions. Live from the lot.</p>
+              <h2 className="font-display font-bold text-4xl text-brand-dark mb-2">LATEST INVENTORY</h2>
+              <p className="mt-2 text-gray-500 max-w-xl">Browsing our {trailers.length} most recent additions. Live from the lot.</p>
             </div>
-            <Link to="/inventory" className="hidden md:flex items-center text-brand-red font-bold hover:text-white transition-colors group tracking-widest uppercase">
+            <Link to="/inventory" className="hidden md:flex items-center text-brand-red font-bold hover:text-brand-dark transition-colors group tracking-widest uppercase">
                 VIEW ALL INVENTORY <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -88,7 +88,7 @@ export const HomePage: React.FC = () => {
           )}
           
           <div className="mt-12 text-center md:hidden">
-             <Link to="/inventory" className="inline-block bg-brand-red text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-brand-red transition-colors w-full tracking-widest uppercase">
+             <Link to="/inventory" className="inline-block bg-brand-red text-white font-bold px-8 py-3 rounded-full hover:bg-brand-dark transition-colors w-full tracking-widest uppercase">
                 VIEW ALL INVENTORY
              </Link>
           </div>
