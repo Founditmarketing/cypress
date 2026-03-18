@@ -54,6 +54,24 @@ export const TrailerDetail: React.FC = () => {
 
   const hasDexterAxles = trailer.name?.toLowerCase().includes('dexter') || false;
 
+  const cleanHtmlContent = (html?: string) => {
+    if (!html) return '';
+    // Remove literal "\n" strings
+    let cleaned = html.replace(/\\n/g, ' ');
+    // Remove empty HTML tags that might survive
+    cleaned = cleaned.replace(/<p>\s*<\/p>/gi, '').replace(/(<br\s*\/?>\s*)+/gi, '<br />');
+    
+    // Check if there's actual readable text or media
+    const strippedText = cleaned.replace(/<[^>]*>?/gm, '').trim();
+    const hasVisibleMedia = /<(img|iframe|video|table)/i.test(cleaned);
+    
+    if (!strippedText && !hasVisibleMedia) return '';
+    return cleaned.trim();
+  };
+
+  const cleanDescription = cleanHtmlContent(trailer.shortDescription);
+  const cleanSpecs = cleanHtmlContent(trailer.htmlSpecs);
+
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
       <QuoteModal 
@@ -167,24 +185,24 @@ export const TrailerDetail: React.FC = () => {
               </div>
             </div>
 
-            {trailer.shortDescription && (
+            {cleanDescription && (
               <div className="mb-8 border-b border-gray-200 pb-8">
                 <h3 className="font-display font-bold text-xl mb-4 border-b border-gray-200 pb-2">DESCRIPTION</h3>
                 <div 
                   className="prose-light text-gray-600 leading-relaxed text-lg" 
-                  dangerouslySetInnerHTML={{ __html: trailer.shortDescription }}
+                  dangerouslySetInnerHTML={{ __html: cleanDescription }}
                 />
               </div>
             )}
 
-            {trailer.htmlSpecs && (
+            {cleanSpecs && (
               <div className="mb-10 bg-[#111] p-6 lg:p-8 rounded-sm shadow-xl border border-gray-800 text-gray-300">
                 <h3 className="font-display font-bold text-3xl mb-6 border-b border-gray-800 pb-3 text-white uppercase tracking-widest">
                   Specifications
                 </h3>
                 <div 
                   className="prose-dark" 
-                  dangerouslySetInnerHTML={{ __html: trailer.htmlSpecs }} 
+                  dangerouslySetInnerHTML={{ __html: cleanSpecs }} 
                 />
               </div>
             )}
