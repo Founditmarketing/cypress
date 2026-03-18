@@ -93,7 +93,7 @@ export const TrailerDetail: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:items-start">
           
           {/* Left Column: Images */}
-          <div className="space-y-4 lg:sticky lg:top-8">
+          <div className="space-y-4 lg:sticky lg:top-28">
             <div className="bg-white p-2 shadow-sm rounded-lg overflow-hidden border border-gray-100 relative">
               <img 
                 src={trailer.images && trailer.images[0] ? trailer.images[0] : '/placeholder.jpg'} 
