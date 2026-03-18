@@ -9,6 +9,8 @@ export interface SheetTrailer {
   regularPrice: string;
   categories: string;
   images: string[];
+  shortDescription?: string;
+  htmlSpecs?: string;
 }
 
 export const TrailerCard: React.FC<{ trailer: SheetTrailer }> = ({ trailer: t }) => {

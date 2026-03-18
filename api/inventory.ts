@@ -13,28 +13,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const sheets = google.sheets({ version: 'v4', auth });
     
-    // Fetch data starting from row 2 up to column G (7 columns)
+    // Fetch data starting from row 2 up to column Z to capture all WP data
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'A2:G',
+      range: 'A2:Z',
     });
 
     const rows = response.data.values || [];
     
     // Map array values to structured objects with grace checks for empty cells
     const inventory = rows.map((row: any[]) => {
-      // row[6] could be empty or undefined
-      const imagesRaw = row[6] || '';
+      // row[9] is Images
+      const imagesRaw = row[9] || '';
       const images = imagesRaw ? imagesRaw.split(',').map((img: string) => img.trim()).filter(Boolean) : [];
 
       return {
-        id: row[0] || '',
-        sku: row[1] || '',
-        name: row[2] || '',
-        inStock: row[3] || '',
-        regularPrice: row[4] || '',
-        categories: row[5] || '',
+        id: row[0] || '', // Using SKU as ID
+        sku: row[0] || '',
+        name: row[1] || '',
+        inStock: row[4] || '',
+        regularPrice: row[7] || '',
+        categories: row[8] || '',
         images,
+        shortDescription: row[2] || '',
+        htmlSpecs: row[12] || '',
       };
     });
 

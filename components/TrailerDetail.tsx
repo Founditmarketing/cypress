@@ -167,12 +167,27 @@ export const TrailerDetail: React.FC = () => {
               </div>
             </div>
 
-            <div className="mb-8">
-              <h3 className="font-display font-bold text-xl mb-4 border-b border-gray-200 pb-2">DESCRIPTION</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">
-                For detailed specifications on the {trailer.name || 'this trailer'}, please contact our dealership. We have full spec sheets available upon request and can guarantee the best price in Texas.
-              </p>
-            </div>
+            {trailer.shortDescription && (
+              <div className="mb-8 border-b border-gray-200 pb-8">
+                <h3 className="font-display font-bold text-xl mb-4 border-b border-gray-200 pb-2">DESCRIPTION</h3>
+                <div 
+                  className="prose-light text-gray-600 leading-relaxed text-lg" 
+                  dangerouslySetInnerHTML={{ __html: trailer.shortDescription }}
+                />
+              </div>
+            )}
+
+            {trailer.htmlSpecs && (
+              <div className="mb-10 bg-[#111] p-6 lg:p-8 rounded-sm shadow-xl border border-gray-800 text-gray-300">
+                <h3 className="font-display font-bold text-3xl mb-6 border-b border-gray-800 pb-3 text-white uppercase tracking-widest">
+                  Specifications
+                </h3>
+                <div 
+                  className="prose-dark" 
+                  dangerouslySetInnerHTML={{ __html: trailer.htmlSpecs }} 
+                />
+              </div>
+            )}
 
             <div className="grid grid-cols-1 gap-8 mb-8">
               <div>

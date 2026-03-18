@@ -42,6 +42,23 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
       }
+      
+      /* WordPress HTML Injection Overrides */
+      .prose-dark .row, .prose-light .row { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+      .prose-dark .col-12, .prose-light .col-12 { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
+      @media (min-width: 768px) { 
+        .prose-dark .col-md-6, .prose-light .col-md-6 { flex: 0 0 50%; max-width: 50%; } 
+      }
+      .prose-dark table { width: 100%; margin-bottom: 2rem; border-collapse: collapse; color: #fff; background: #1a1a1a; border-radius: 4px; overflow: hidden; }
+      .prose-dark table th, .prose-dark table td { padding: 1rem; text-align: left; border-bottom: 1px solid #333; }
+      .prose-dark table thead th { border-bottom: 2px solid #CC0000; text-transform: uppercase; letter-spacing: 0.05em; color: #888; font-size: 0.85rem; }
+      .prose-dark img { max-width: 100%; height: auto; border-radius: 4px; border: 1px solid #333; }
+      .prose-dark h2 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: bold; text-transform: uppercase; margin-bottom: 1rem; color: #fff; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+      .prose-dark p { color: #aaa; line-height: 1.6; margin-bottom: 1rem; }
+      .prose-dark .larger { font-size: 1.125rem; font-weight: 600; color: #fff; margin-bottom: 1rem; display: block; }
+      
+      .prose-light img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+      .prose-light p { margin-bottom: 1rem; color: #4b5563; }
     </style>
   <script type="importmap">
 {
