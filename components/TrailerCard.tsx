@@ -14,12 +14,12 @@ export interface SheetTrailer {
 export const TrailerCard: React.FC<{ trailer: SheetTrailer }> = ({ trailer: t }) => {
   return (
     <div className="group bg-[#111] rounded-sm shadow-2xl border-2 border-gray-800 overflow-hidden flex flex-col h-full hover:border-brand-red transition-all duration-300">
-      <div className="relative h-64 overflow-hidden bg-white border-b-2 border-brand-red/30 group-hover:border-brand-red transition-all flex items-center justify-center p-4">
+      <div className="relative h-64 overflow-hidden bg-white border-b-2 border-brand-red/30 group-hover:border-brand-red transition-all">
         {t.images && t.images.length > 0 ? (
           <img 
             src={t.images[0]} 
             alt={t.name || 'Trailer'} 
-            className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400 font-display tracking-widest uppercase text-xs">No Image</div>
