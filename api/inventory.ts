@@ -22,15 +22,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const rows = response.data.values || [];
     
     // Map array values to structured objects with grace checks for empty cells
-    const inventory = rows.map((row: any[]) => {
+    const inventory = rows.map((row: any[], index: number) => {
       // row[9] is Images
       const imagesRaw = row[9] || '';
       const images = imagesRaw ? imagesRaw.split(',').map((img: string) => img.trim()).filter(Boolean) : [];
 
+      const sku = row[0] || '';
+      const name = row[1] || '';
+      const fallbackId = name ? `${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${index}` : `trailer-${index}`;
+
       return {
-        id: row[0] || '', // Using SKU as ID
-        sku: row[0] || '',
-        name: row[1] || '',
+        id: sku || fallbackId,
+        sku: sku,
+        name: name,
         inStock: row[4] || '',
         regularPrice: row[7] || '',
         categories: row[8] || '',
