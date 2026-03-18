@@ -29,9 +29,13 @@ export const InventoryPage: React.FC = () => {
 
   const filteredTrailers = trailers.filter(t => {
     if (selectedBrand === 'All') return true;
-    const itemBrand = (t.brand || '').toLowerCase().trim();
-    const filterBrand = selectedBrand.toLowerCase().trim();
-    return itemBrand.includes(filterBrand);
+    const searchTarget = selectedBrand.toLowerCase().trim();
+    
+    const nameMatch = t.name?.toLowerCase().includes(searchTarget);
+    const categoryMatch = t.categories?.toLowerCase().includes(searchTarget);
+    const brandMatch = t.brand?.toLowerCase().includes(searchTarget);
+    
+    return nameMatch || categoryMatch || brandMatch;
   });
 
   return (
