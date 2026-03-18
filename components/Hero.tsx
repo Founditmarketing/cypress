@@ -7,9 +7,12 @@ export const Hero: React.FC = () => {
     <div className="relative h-[85vh] bg-brand-dark overflow-hidden flex items-center">
       {/* Background Image/Overlay */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1591736287093-b09b40742d4a?q=80&w=2070&auto=format&fit=crop" 
-          alt="Heavy Duty Trailer" 
+        <video 
+          src="/Big-Tex-Background.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
           className="w-full h-full object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />

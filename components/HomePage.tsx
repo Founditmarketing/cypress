@@ -49,12 +49,12 @@ export const HomePage: React.FC = () => {
         <div className="container mx-auto px-4 text-center">
             <p className="text-gray-400 font-bold uppercase tracking-widest mb-8 text-xs">Proud Authorized Dealer For</p>
             <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                {/* Text logos styled to look like brand logos */}
-                <div className="text-4xl md:text-5xl font-black italic text-brand-dark tracking-tighter transform -skew-x-12">BIG TEX</div>
-                <div className="text-3xl md:text-4xl font-serif font-extrabold text-gray-800 tracking-wide uppercase">ANVIL</div>
-                <div className="text-3xl md:text-4xl font-sans font-black text-brand-red tracking-tight">TXP</div>
-                <div className="text-2xl md:text-3xl font-mono font-bold text-gray-700">LIBERTY</div>
-                <div className="text-xl md:text-2xl font-sans font-bold text-[#004B8D] border-2 border-[#004B8D] px-2 py-1">DEXTER AXLE</div>
+                {/* Image logos for the brands */}
+                <img src="/BigTex-Logo.png" alt="Big Tex" className="h-12 md:h-16 object-contain" />
+                <img src="/anvilbrandlogo.jpg" alt="Anvil" className="h-12 md:h-16 object-contain" />
+                <img src="/IMG_7394.jpeg" alt="TXP" className="h-12 md:h-16 object-contain" />
+                <img src="/libertybrand.png" alt="Liberty" className="h-12 md:h-16 object-contain" />
+                <img src="/dexter-axle-primary.png" alt="Dexter Axle" className="h-12 md:h-16 object-contain" />
             </div>
         </div>
       </section>
