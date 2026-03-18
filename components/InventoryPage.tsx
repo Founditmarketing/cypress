@@ -29,7 +29,9 @@ export const InventoryPage: React.FC = () => {
 
   const filteredTrailers = trailers.filter(t => {
     if (selectedBrand === 'All') return true;
-    return t.brand?.toLowerCase().includes(selectedBrand.toLowerCase());
+    const itemBrand = (t.brand || '').toLowerCase().trim();
+    const filterBrand = selectedBrand.toLowerCase().trim();
+    return itemBrand.includes(filterBrand);
   });
 
   return (
