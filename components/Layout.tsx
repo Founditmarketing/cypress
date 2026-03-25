@@ -24,7 +24,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <div className="flex flex-col min-h-screen">
       {/* Top Bar */}
       <div className="bg-brand-dark text-white py-2 text-sm hidden md:block">
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="w-full px-4 md:px-8 lg:px-12 flex justify-between items-center">
           <div className="flex space-x-6">
             <span className="flex items-center hover:text-brand-red transition-colors cursor-pointer">
               <MapPin className="w-4 h-4 mr-2 text-brand-red" />
@@ -47,18 +47,18 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Main Navigation */}
       <header 
         className={`sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
+          isScrolled ? 'bg-white shadow-md py-1' : 'bg-white py-2'
         }`}
       >
-        <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="w-full px-4 md:px-8 lg:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center group">
-            {/* Logo Simulation */}
-            <div className="bg-brand-red text-white font-display font-bold text-2xl px-3 py-1 -skew-x-12 group-hover:bg-brand-dark transition-colors">
-              <span className="skew-x-12 inline-block">CYPRESS</span>
-            </div>
-            <div className="ml-2 font-display font-bold text-2xl text-brand-dark">
-              BIG TEX <span className="text-brand-red">TRAILERS</span>
-            </div>
+            <img 
+              src="/cypress_big_tex_trailers_logo.png" 
+              alt="Cypress Big Tex Trailers Logo" 
+              className={`object-contain w-auto transition-all duration-300 group-hover:scale-105 ${
+                isScrolled ? 'h-10 md:h-14' : 'h-16 md:h-20'
+              }`}
+            />
           </Link>
 
           {/* Desktop Nav */}

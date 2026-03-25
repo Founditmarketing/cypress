@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cypress Big Tex Trailers</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Oswald', 'sans-serif'],
+              sans: ['Barlow', 'sans-serif'],
+              display: ['"Barlow Condensed"', 'sans-serif'],
             },
             colors: {
               brand: {
@@ -41,6 +41,18 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
+      }
+      
+      /* Typography Overrides for Branding */
+      .font-display {
+        font-style: italic !important;
+        text-shadow: -3px 3px 0px rgba(0, 0, 0, 0.1);
+      }
+      .bg-brand-dark .font-display,
+      .bg-gray-900 .font-display,
+      .text-white .font-display,
+      .font-display.text-white {
+        text-shadow: -3px 3px 0px rgba(255, 255, 255, 0.15);
       }
       
       /* WordPress HTML Injection Overrides */
