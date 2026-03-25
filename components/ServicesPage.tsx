@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 
 export const ServicesPage: React.FC = () => {
   const services = [
-    { title: 'Axle & Bearing Service', desc: 'Complete repack, seal replacement, and brake inspection.', icon: Settings },
-    { title: 'Electrical Diagnostics', desc: 'Fixing wiring shorts, LED upgrades, and connector replacements.', icon: Wrench },
-    { title: 'Hitch Installation', desc: 'Gooseneck, 5th wheel, and bumper pull hitch installs.', icon: PenTool },
-    { title: 'Welding & Fabrication', desc: 'Frame repair, custom ramps, and structural modifications.', icon: CheckCircle },
+    { title: 'Axle Repair & Replacement', desc: 'Expert diagnostics for bent axles, Dexter swaps, and spindle repairs.', icon: Settings, link: '/trailer-axle-repair-cypress' },
+    { title: 'Electrical & Wiring Repair', desc: 'Fixing wiring shorts, LED upgrades, and 7-way plug replacements.', icon: Wrench, link: '/trailer-electrical-rewiring-cypress' },
+    { title: 'Gooseneck Hitch Installation', desc: 'B&W turnover balls and 5th wheel hitches installed right.', icon: PenTool, link: '/gooseneck-hitch-installation-cypress' },
+    { title: 'Custom Welding & Fab', desc: 'Structural frame repair, custom ramps, and gate modifications.', icon: CheckCircle, link: '/custom-trailer-welding-cypress' },
+    { title: 'Brake Repair & Controllers', desc: 'Electric and hydraulic brake repair and in-cab controllers.', icon: Wrench, link: '/trailer-brake-repair-cypress' },
+    { title: 'Bearing Repacking', desc: 'Preventative bearing repacking and hub service.', icon: Settings, link: '/trailer-bearing-repacking-cypress' },
+    { title: 'Commercial DOT Inspections', desc: 'Maintain legal compliance with annual Federal DOT inspections.', icon: CheckCircle, link: '/commercial-trailer-dot-inspections' },
   ];
 
   return (
@@ -30,11 +33,11 @@ export const ServicesPage: React.FC = () => {
           {/* Service List */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {services.map((s, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <s.icon className="w-10 h-10 text-brand-red mb-4" />
-                <h3 className="font-display font-bold text-xl mb-2 text-brand-dark">{s.title}</h3>
+              <Link to={s.link} key={i} className="block bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-brand-red transition-all group">
+                <s.icon className="w-10 h-10 text-brand-red mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="font-display font-bold text-xl mb-2 text-brand-dark group-hover:text-brand-red transition-colors">{s.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
 
