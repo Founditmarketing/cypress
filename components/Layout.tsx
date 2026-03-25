@@ -62,7 +62,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8 font-display font-bold text-lg lg:text-xl uppercase tracking-wide text-brand-dark">
+          <nav className="hidden md:flex items-center space-x-8 font-display font-bold text-lg lg:text-xl uppercase tracking-wide text-brand-dark" style={{ textShadow: 'none' }}>
             <Link to="/" className="hover:text-brand-red transition-colors">Home</Link>
             <Link to="/inventory" className="hover:text-brand-red transition-colors">Inventory</Link>
             <Link to="/parts" className="hover:text-brand-red transition-colors">Parts</Link>
@@ -87,7 +87,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
         {/* Mobile Nav Drawer */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 flex flex-col p-4 space-y-4 font-display font-bold text-xl uppercase">
+          <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 flex flex-col p-4 space-y-4 font-display font-bold text-xl uppercase" style={{ textShadow: 'none' }}>
             <Link to="/" className="text-brand-dark hover:text-brand-red">Home</Link>
             <Link to="/inventory" className="text-brand-dark hover:text-brand-red">Inventory</Link>
             <Link to="/parts" className="text-brand-dark hover:text-brand-red">Parts</Link>
